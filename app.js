@@ -73,7 +73,7 @@ btnEqual.onclick = function(event) {
       result = firstValue - secondValue
       break;
     case '*':
-      result = firstValue - secondValue
+      result = firstValue * secondValue
       break;
     case '/':
       result = firstValue / secondValue
