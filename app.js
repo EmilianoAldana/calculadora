@@ -45,9 +45,24 @@ btnOne.onclick    = numberOnclick
 btnCero.onclick   = numberOnclick
 btnPoint.onclick  = numberOnclick
 
+btnMC.onclick = function() { //MC (Memory Clear): Elimina cualquier número almacenado en memoria.
+  display.innerText = ""
+}
+
 btnC.onclick = function() {
   display.innerText = ""
 }
+
+btnMadd.onclick = function() { //M+: Suma el número mostrado a otro número que se encuentre en memoria pero no muestra la suma de estos números.
+  result  = firstValue + secondValue;
+  display.innerText = result;
+}
+
+btnSub.onclick = function() { //M-: Resta el número mostrado a otro número que se encuentre en memoria pero no muestra la resta de estos números.
+  result  = firstValue - secondValue;
+  display.innerText = result;
+}
+
 
 const operatorFunction = function(event) {
   firstValue = parseFloat(display.innerText)
