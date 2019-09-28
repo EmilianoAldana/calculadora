@@ -1,7 +1,19 @@
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 const app = express()
+const Result = require('./models')
+
+const url = "mongodb+srv://Emiliano:Calculadora123@cluster0-58s7q.mongodb.net/test?retryWrites=true&w=majority"
+
+mongoose.connect(url, {}, (error) ==>{
+  if (error) {
+    console.log(error)
+  } else {
+    console.log ("Base de datos conectada")
+  }
+})
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -16,20 +28,28 @@ app.get('/getresults/:firstValue/:secondValue/:selectedOperator', function(req, 
     switch (req.params.selectedOperator) {
         case '*':
             result = firstValue * secondValue
-            break
+            break;
         case '+':
             result = firstValue + secondValue
-            break
+            break;
         case '-':
             result = firstValue - secondValue
-            break
+            break;
         case '/':
             result = firstValue / secondValue
-            break
+            break;
         default:
-            break
+            break;
     }
-    res.send({ result: result })
+    const newResult = new Result ({value: result})
+    newResult.sav((error, result) ==>{
+      if(error) {
+        console.log(error)
+      } else {
+        console.log(result)
+      }
+    })
+    res.status(200).send({ result: result })
 })
 
 app.listen(3000, () => {
